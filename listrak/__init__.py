@@ -8,12 +8,12 @@ class Listrak:
     """https://api.listrak.com/email
     """
     def __init__(self, client_id, client_secret):
-        self.root_endpoint = "https://api.listrak.com"
+        self.host = "https://api.listrak.com"
         self.client_id = client_id
         self.client_secret = client_secret
         self.auth_token_data = self.get_auth_token_data()
 
-        self.email = api.Email(self.root_endpoint, self.bearer_token)
+        self.email = api.Email(self.host, self.bearer_token)
 
     def get_auth_token_data(self) -> None:
         """Authenticate using OAuth 2.0.
@@ -26,7 +26,6 @@ class Listrak:
             "client_id": self.client_id,
             "client_secret": self.client_secret
         }
-
         r = requests.post("https://auth.listrak.com/OAuth2/Token", data=body)
         try:
             r.raise_for_status()
