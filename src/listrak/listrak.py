@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 
-from src.listrak import email
+from listrak import email
 
 
 class Listrak:
