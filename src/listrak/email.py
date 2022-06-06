@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Literal
 from urllib.parse import urlencode
 
 
@@ -27,7 +26,7 @@ class ListEndpoint:
     def create_a_list(
         self,
         list_name: str,
-        bounce_handling: Literal["None", "Standard", "Aggressive"] = "None",
+        bounce_handling: ("None" or "Standard" or "Aggressive") = "None",
         bounce_unsubscribe_count: int = 1
         ) -> dict:
         """Creates a new list in your account.
@@ -76,7 +75,7 @@ class ListEndpoint:
         self,
         list_id,
         list_name: str,
-        bounce_handling: Literal["None", "Standard", "Aggressive"] = "None",
+        bounce_handling: ("None" or "Standard" or "Aggressive") = "None",
         bounce_unsubscribe_count: int = 1,
         ) -> dict:
         """Returns your account's collection of lists.
@@ -148,12 +147,12 @@ class ListImportEndpoint:
         file_mappings_segmentation_field_id: int,
         file_mappings_default_value: str,
         file_mappings_file_column: int = 0,
-        file_mappings_file_column_type: Literal["Email", "SegmentationField", "Event"] = "Email",
+        file_mappings_file_column_type: ("Email" or "SegmentationField" or "Event") = "Email",
         file_delimiter: str = ",",
         file_name: str = str(datetime.now())[0:16].replace(" ", "@").replace(":", ""),
         has_column_names: bool = True,
-        import_type: Literal["AddSubscribers", "AddSubscribersAndSegmentationData", "RemoveSubscribers", "UpdateSubscribers"] = "AddSubscribers",
-        segentation_import_type: Literal["Update", "Append", "Overwrite"] = "",
+        import_type: ("AddSubscribers" or "AddSubscribersAndSegmentationData" or "RemoveSubscribers" or "UpdateSubscribers") = "AddSubscribers",
+        segentation_import_type: ("Update" or "Append" or "Overwrite") = "",
         suppress_email_notifications: bool = False,
         text_qualifier: str = '"'
         ) -> str:
@@ -223,14 +222,14 @@ class ContactEndpoint:
         self,
         list_id: int,
         email_address: str,
-        subscription_state: Literal["Subscribed", "Unsubscribed"] = "Subscribed",
+        subscription_state: ("Subscribed" or "Unsubscribed") = "Subscribed",
         external_contact_id: str = None,
         segmentation_field_values: [{"segmentationFieldId": int,"value": str}] = None,
         event_ids: str = None,
         override_unsubscribe: bool = False,
         subscribed_by_contact: bool = False,
         send_double_opt_in: bool = False,
-        update_type: Literal["Update", "Append", "Overwrite"] = "Update",
+        update_type: ("Update" or "Append" or "Overwrite") = "Update",
         new_email_address: str = None,
         ) -> str:
         """Creates or updates a contact on the specified list.
